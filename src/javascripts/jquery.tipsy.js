@@ -210,7 +210,7 @@ define([
 
         tip: function() {
             if (!this.$tip) {
-                this.$tip = this.options.tipTemplate();
+                this.$tip = $(_.result(this.options, 'tipTemplate'));
 
                 this.$tip.data('tipsy-pointee', this.$element[0]);
             }
@@ -353,6 +353,8 @@ define([
         return 's'+$ew;
     };
 
+    var defaultTipTemplate = '<div><div class="tipsy-arrow-border"></div><div class="tipsy-arrow"></div><div class="tipsy-inner"></div></div>';
+
     $.fn.tipsy.defaults = {
         className: null,
         delayIn: 0,
@@ -367,9 +369,9 @@ define([
         opacity: 1,
         title: 'title',
         trigger: 'hover',
-        templateMethod: null, // used to output all tip views
+        templateMethod: function(i) { return i; }, // used to output all tip views
         template: "title",
-        tipTemplate: null,
+        tipTemplate: defaultTipTemplate,
         styleTipOffsetWE: 22,
         onCreate: function(){
 
