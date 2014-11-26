@@ -8,6 +8,8 @@ define([
     "lodash"
 ], function($, _) {
 
+    'use strict';
+
     function maybeCall(thing, ctx) {
         return (typeof thing == 'function') ? (thing.call(ctx)) : thing;
     }
@@ -254,7 +256,9 @@ define([
             return this.data('tipsy');
         } else if (typeof options == 'string') {
             var tipsy = this.data('tipsy');
-            if (tipsy) tipsy[options]();
+            if (tipsy) {
+                tipsy[options]();
+            }
             return this;
         }
 
@@ -278,7 +282,9 @@ define([
             } else {
                 tipsy.fixTitle();
                 setTimeout(function() {
-                    if (tipsy.hoverState == 'in') tipsy.show();
+                    if (tipsy.hoverState == 'in') {
+                        tipsy.show();
+                    }
                 }, options.delayIn);
             }
         }
@@ -292,7 +298,9 @@ define([
             } else {
                 tipsy.clearCloseTimer();
                 tipsy.timeoutId = setTimeout(function() {
-                    if (tipsy.hoverState == 'out') tipsy.hide();
+                    if (tipsy.hoverState == 'out') {
+                        tipsy.hide();
+                    }
                 }, options.delayOut);
             }
         }
@@ -314,8 +322,9 @@ define([
             } else {
                 this.on(eventIn + ".tip", enter);
 
-                if(!options.stayOpen)
+                if(!options.stayOpen) {
                     this.on(eventOut + ".tip", leave);
+                }
             }
         }
 
@@ -410,10 +419,18 @@ define([
                 }
             }
 
-            if ($this.offset().top < boundTop) dir.ns = 'n';
-            if ($this.offset().left < boundLeft) dir.ew = 'w';
-            if ($(window).width() + $(document).scrollLeft() - ($this.offset().left + $this.width()) < margin) dir.ew = 'e';
-            if ($(window).height() + $(document).scrollTop() - ($this.offset().top + $this.height()) < margin) dir.ns = 's';
+            if ($this.offset().top < boundTop) {
+                dir.ns = 'n';
+            }
+            if ($this.offset().left < boundLeft) {
+                dir.ew = 'w';
+            }
+            if ($(window).width() + $(document).scrollLeft() - ($this.offset().left + $this.width()) < margin) {
+                dir.ew = 'e';
+            }
+            if ($(window).height() + $(document).scrollTop() - ($this.offset().top + $this.height()) < margin) {
+                dir.ns = 's';
+            }
 
             if (dir.ns) {
                 return dir.ns + (dir.ew ? dir.ew : '');
