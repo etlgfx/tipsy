@@ -42,8 +42,8 @@ define([
                     return;
                 }
 
-                $tip.find('.vf-tipsy-inner')[this.options.html ? 'html' : 'text'](title);
-                $tip[0].className = 'viafoura vf-tipsy'; // reset classname in case of dynamic gravity
+                $tip.find('.tipsy-inner')[this.options.html ? 'html' : 'text'](title);
+                $tip[0].className = 'tipsy'; // reset classname in case of dynamic gravity
                 $tip.remove().css({
                     top: 0,
                     left: 0,
@@ -53,7 +53,7 @@ define([
 
                 // Detect existing tooltips. If found then insert the new one after the last fount tip.
                 // This ensures that the newest tooltip is lowest in the DOM so it will appear above the others.
-                var existingtip = $('.vf-tipsy').filter(':last');
+                var existingtip = $('.tipsy').filter(':last');
                 if (existingtip[0] !== undefined) {
                     $tip.insertAfter(existingtip);
                 } else {
@@ -78,7 +78,7 @@ define([
                     $tip.css({
                         visibility: 'visible',
                         opacity: this.options.opacity
-                    }).addClass('vf-tip-animate');
+                    }).addClass('tip-animate');
 
                     this.options.onOpen(this);
                 }
@@ -129,7 +129,7 @@ define([
             }
 
 
-            var styleTipWidth = tip.find('.vf-tipsy-arrow').outerWidth(),
+            var styleTipWidth = tip.find('.tipsy-arrow').outerWidth(),
                 tipPointTargetFromLeft = Math.round(pos.left + (this.$element.outerWidth() / 2) ),
                 tipPointTargetFromRight = Math.round( $(window).width() - (pos.left + (this.$element.outerWidth() / 2) ) ),
                 tipsyPaddingWE = (tip.outerWidth() - tip.width()) / 2,
@@ -144,22 +144,22 @@ define([
                     if (tipPointTargetFromLeft < minTipCenterOffset) {
                         // reposition if too close to the edge. Account for padding as well.
                         adjust = ( ( tipPointTargetFromLeft - styleTipWidth / 2 ) >= tipsyPaddingWE ? ( tipPointTargetFromLeft - styleTipWidth / 2 ) : tipsyPaddingWE );
-                        tip.find('.vf-tipsy-arrow, .vf-tipsy-arrow-border').css('left', adjust);
+                        tip.find('.tipsy-arrow, .tipsy-arrow-border').css('left', adjust);
                     }
                 } else {
                     tp.left = pos.left + pos.width / 2 - actualWidth + 30;
                     if (tipPointTargetFromRight < minTipCenterOffset) {
                         adjust = ( ( tipPointTargetFromRight - styleTipWidth / 2 ) >= tipsyPaddingWE ? ( tipPointTargetFromRight - styleTipWidth / 2 ) : tipsyPaddingWE );
-                        tip.find('.vf-tipsy-arrow, .vf-tipsy-arrow-border').css('right', adjust);
+                        tip.find('.tipsy-arrow, .tipsy-arrow-border').css('right', adjust);
                     }
                 }
             }
 
             if (tp.left < 0) { tp.left = 0; } // Dont let the tooltip have negative left position
 
-            tip.css(tp).addClass('vf-tipsy-' + gravity);
-            tip.find('.vf-tipsy-arrow')[0].className = 'vf-tipsy-arrow vf-tipsy-arrow-' + gravity.charAt(0);
-            tip.find('.vf-tipsy-arrow-border')[0].className = 'vf-tipsy-arrow-border vf-tipsy-arrow-border-' + gravity.charAt(0);
+            tip.css(tp).addClass('tipsy-' + gravity);
+            tip.find('.tipsy-arrow')[0].className = 'tipsy-arrow tipsy-arrow-' + gravity.charAt(0);
+            tip.find('.tipsy-arrow-border')[0].className = 'tipsy-arrow-border tipsy-arrow-border-' + gravity.charAt(0);
 
             if (this.options.className) {
                 this.$tip.addClass(maybeCall(this.options.className, this.$element[0]));
@@ -210,7 +210,7 @@ define([
             if (!this.$tip) {
                 this.$tip = this.options.tipTemplate();
 
-                this.$tip.data('vf-tipsy-pointee', this.$element[0]);
+                this.$tip.data('tipsy-pointee', this.$element[0]);
             }
             return this.$tip;
         },
@@ -375,8 +375,8 @@ define([
     };
 
     $.fn.tipsy.revalidate = function() {
-        $('.vf-tipsy').each(function() {
-            var pointee = $.data(this, 'vf-tipsy-pointee');
+        $('.tipsy').each(function() {
+            var pointee = $.data(this, 'tipsy-pointee');
             if (!pointee || !isElementInDOM(pointee)) {
                 $(this).remove();
             }
