@@ -326,6 +326,15 @@ define([
                     this.on(eventOut + ".tip", leave);
                 }
             }
+        } else {
+            this.showTip = function(title) {
+                if (title) {
+                    var tipsy = get(this);
+                    tipsy.options.title = title;
+                }
+                enter.apply(this);
+            }.bind(this);
+            this.hideTip = leave.bind(this);
         }
 
         return this;
