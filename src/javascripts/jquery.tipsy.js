@@ -450,4 +450,11 @@ define([
         };
     };
 
+    /**
+     * Removes all tipsy elements from the DOM
+     */
+    $.fn.tipsy.clear = function() {
+        $('.tipsy').remove();
+    };
+
 });
