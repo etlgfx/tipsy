@@ -227,6 +227,8 @@ define([
             this.hide();
             this.$element.removeData("tipsy");
             this.$element.off(".tip");
+            this.$element.showTip = undefined;
+            this.$element.hideTip = undefined;
             this.$element = null;
             this.options.onClose(this);
             this.options = null;
@@ -305,9 +307,18 @@ define([
             }
         }
 
-        if (!options.live) this.each(function() {
-            get(this);
-        });
+        if (options.clear) {
+            this.each(function() {
+                get(this).remove();
+            });
+            return;
+        }
+
+        if (!options.live) {
+            this.each(function() {
+                get(this);
+            });
+        }
 
         if (options.trigger != 'manual') {
             var eventIn = options.trigger == 'hover' ? 'mouseenter' : 'focus',
@@ -391,7 +402,8 @@ define([
         onClose: function(){
 
         },
-        interactive: false // will let you mouse over the tooltip
+        interactive: false, // will let you mouse over the tooltip
+        clear: false,       // if true, removes an existing tooltip from this element
     };
 
     $.fn.tipsy.revalidate = function() {
