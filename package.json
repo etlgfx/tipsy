@@ -1,0 +1,28 @@
+{
+    "name": "tipsy",
+    "description": "Tipsy Tooltip library",
+    "version": "0.0.1",
+    "keywords": [ ],
+    "maintainers": [
+        {
+            "name": "jaz303",
+            "web": "https://github.com/jaz303/tipsy"
+        },
+        {
+            "name": "Eric Liang",
+            "twitter": "@etlgfx",
+            "web": "http://github.com/etlgfx"
+        }
+    ],
+    "dependencies": {},
+    "bugs": {
+        "url": "https://github.com/etlgfx/tipsy/issues"
+    },
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:etlgfx/tipsy.git"
+            }
+    ],
+    "homepage": "http://github.com/etlgfx/tipsy"
+}
